@@ -218,8 +218,18 @@ func GetRequestUrlParams(uri string) string {
  * @TIME: 2020-04-26 21:13
  * @Description: 返回时间字符串
 **/
-func RtnTmString() (timsStr string) {
-	timsStr = time.Now().Format(TIME_FORMAT_MS)
+func RtnTmString() (timeStr string) {
+	timeStr = time.Now().Format(TIME_FORMAT_MS)
+	return
+}
+
+/**
+ * @Author: MassAdobe
+ * @TIME: 2021/3/15 4:48 下午
+ * @Description: 根据给定日期返回日期字符串
+**/
+func FormatDate(time time.Time) (timeStr string) {
+	timeStr = time.Format(TIME_FORMAT_MONTH)
 	return
 }
 

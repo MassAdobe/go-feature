@@ -19,18 +19,18 @@ import (
 **/
 func GetWhole() []*entity.WholeEntity {
 	sql := `
-select c.good_id            as good_id,
-       c.good_name          as good_name,
-       b.price_amount       as price,
-       b.price_type         as price_type,
-       a.transaction_type   as transaction_type,
-       a.transaction_date   as date,
-       a.transaction_amount as amount
-from t_good_transaction a
-         left join t_good_price b on a.price_id = b.price_id
-         left join t_good c on b.good_id = c.good_id
-order by c.good_id;
-`
+			select c.good_id            as good_id,
+				   c.good_name          as good_name,
+				   b.price_amount       as price,
+				   b.price_type         as price_type,
+				   a.transaction_type   as transaction_type,
+				   a.transaction_date   as date,
+				   a.transaction_amount as amount
+			from t_good_transaction a
+					 left join t_good_price b on a.price_id = b.price_id
+					 left join t_good c on b.good_id = c.good_id
+			order by c.good_id, a.transaction_date, price_type;
+		`
 	rtn := make([]*entity.WholeEntity, 0)
 	if err := db.DB.Raw(sql).Scan(&rtn).Error; err != nil {
 		fmt.Println("【数据库查询错误】", "获取所有项目")
